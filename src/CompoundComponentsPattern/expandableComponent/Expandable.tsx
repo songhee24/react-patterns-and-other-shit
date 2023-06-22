@@ -10,6 +10,7 @@ import {
 import Header from "./Header";
 import Body from "./Body";
 import Icon from "./Icon";
+import "./Expandable.css";
 
 type ExpandableContextType = {
   toggle: () => any;
