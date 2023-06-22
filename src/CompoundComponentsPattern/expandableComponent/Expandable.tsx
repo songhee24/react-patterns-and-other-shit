@@ -26,7 +26,7 @@ const { Provider } = ExpandableContext;
 interface Props {
   children: ReactNode;
   onExpand: (params: any) => void;
-  className: string;
+  className?: string;
 }
 
 const Expandable = ({

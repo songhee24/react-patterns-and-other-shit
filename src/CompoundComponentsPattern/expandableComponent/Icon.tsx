@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ExpandableContext } from "./Expandable";
 import "./Icon.css";
 interface Props {
-  className: string;
+  className?: string;
 }
 
 const Icon = ({ className = "", ...otherProps }: Props) => {

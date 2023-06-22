@@ -4,7 +4,7 @@ import "./Body.css";
 
 interface Props {
   children: ReactNode;
-  className: string;
+  className?: string;
 }
 const Body = ({ children, className = "", ...otherProps }: Props) => {
   const { expanded } = useContext(ExpandableContext);
