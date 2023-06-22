@@ -26,9 +26,15 @@ const { Provider } = ExpandableContext;
 interface Props {
   children: ReactNode;
   onExpand: (params: any) => void;
+  className: string;
 }
 
-const Expandable = ({ children, onExpand }: Props) => {
+const Expandable = ({
+  children,
+  onExpand,
+  className = "",
+  ...otherProps
+}: Props) => {
   const [expanded, setExpanded] = useState(false);
   const toggle = useCallback(
     () => setExpanded((prevExpanded) => !prevExpanded),
@@ -44,7 +50,15 @@ const Expandable = ({ children, onExpand }: Props) => {
   }, [expanded]);
 
   const value = useMemo(() => ({ expanded, toggle }), [expanded, toggle]);
-  return <Provider value={value}>{children}</Provider>;
+  const combinedClassNames = ["Expandable", className].join("");
+
+  return (
+    <Provider value={value}>
+      <div className={combinedClassNames} {...otherProps}>
+        {children}
+      </div>
+    </Provider>
+  );
 };
 
 export default Expandable;
