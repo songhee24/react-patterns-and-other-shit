@@ -1,5 +1,7 @@
 import { ReactNode, useContext } from "react";
 import { ExpandableContext } from "./Expandable";
+import "./Body.css";
+
 interface Props {
   children: ReactNode;
   className: string;
