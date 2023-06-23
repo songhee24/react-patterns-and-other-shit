@@ -7,8 +7,17 @@ import {
   useRef,
   useState,
 } from "react";
+import any = jasmine.any;
 
-const ExpandableContext = createContext({});
+type ExpandableContextType = {
+  toggle: () => any;
+  expanded: boolean;
+};
+
+export const ExpandableContext = createContext<ExpandableContextType>({
+  toggle: () => any,
+  expanded: false,
+});
 const { Provider } = ExpandableContext;
 
 interface Props {
