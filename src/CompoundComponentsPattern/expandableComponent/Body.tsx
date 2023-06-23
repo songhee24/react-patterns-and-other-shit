@@ -5,6 +5,6 @@ interface Props {
 }
 const Body = ({ children }: Props) => {
   const { expanded } = useContext(ExpandableContext);
-  return expanded ? children : null;
+  return <>{expanded ? children : null}</>;
 };
 export default Body;
