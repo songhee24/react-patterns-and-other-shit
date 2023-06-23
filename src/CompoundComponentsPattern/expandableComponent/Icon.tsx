@@ -3,6 +3,6 @@ import { ExpandableContext } from "./Expandable";
 
 const Icon = () => {
   const { expanded } = useContext(ExpandableContext);
-  return expanded ? "-" : "+";
+  return <>{expanded ? "-" : "+"}</>;
 };
 export default Icon;

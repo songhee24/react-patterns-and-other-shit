@@ -1,11 +1,13 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import Expandable from "./CompoundComponentsPattern/expandableComponent/Expandable";
 
 function App() {
   return (
-    <div className="App">
-      hello world
-    </div>
+    <Expandable>
+      <Expandable.Header>React hooks</Expandable.Header>
+      <Expandable.Icon />
+      <Expandable.Body>Hooks are awesome</Expandable.Body>
+    </Expandable>
   );
 }
 
