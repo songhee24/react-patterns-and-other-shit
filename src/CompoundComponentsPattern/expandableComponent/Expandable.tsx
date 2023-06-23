@@ -7,7 +7,6 @@ import {
   useRef,
   useState,
 } from "react";
-import any = jasmine.any;
 import Header from "./Header";
 import Body from "./Body";
 import Icon from "./Icon";
@@ -18,7 +17,7 @@ type ExpandableContextType = {
 };
 
 export const ExpandableContext = createContext<ExpandableContextType>({
-  toggle: () => any,
+  toggle: () => {},
   expanded: false,
 });
 const { Provider } = ExpandableContext;
