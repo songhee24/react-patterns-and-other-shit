@@ -8,6 +8,9 @@ import {
   useState,
 } from "react";
 import any = jasmine.any;
+import Header from "./Header";
+import Body from "./Body";
+import Icon from "./Icon";
 
 type ExpandableContextType = {
   toggle: () => any;
@@ -45,3 +48,8 @@ const Expandable = ({ children, onExpand }: Props) => {
 };
 
 export default Expandable;
+
+// Remember this is just a personal reference. It's not mandatory
+Expandable.Header = Header;
+Expandable.Body = Body;
+Expandable.Icon = Icon;
