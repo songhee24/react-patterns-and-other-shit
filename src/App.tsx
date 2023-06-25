@@ -29,7 +29,7 @@ function App() {
 
   const { expanded, toggle, resetDep, reset } = useExpanded(true);
   useEffectAfterMount(() => {
-    console.log("reset cleanup in progress!!!!");
+    window.open("https://leanpub.com/reintroducing-react", "_blank");
   }, [resetDep]);
 
   return (
