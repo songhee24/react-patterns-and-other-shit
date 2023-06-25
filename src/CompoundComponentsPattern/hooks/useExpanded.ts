@@ -3,8 +3,8 @@ const callFunctionsInSequence =
   (...fns: any[]) =>
   (...args: any) =>
     fns.forEach((fn) => fn && fn(...args));
-export default function useExpanded() {
-  const [expanded, setExpanded] = useState<boolean>(false);
+export default function useExpanded(initialExpanded = false) {
+  const [expanded, setExpanded] = useState<boolean>(initialExpanded);
   const toggle = useCallback(
     () => setExpanded((prevExpanded) => !prevExpanded),
     []
