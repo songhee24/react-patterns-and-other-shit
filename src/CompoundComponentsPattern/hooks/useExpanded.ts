@@ -6,7 +6,7 @@ const callFunctionsInSequence =
 
 const internalReducer = (
   state: { expanded: boolean },
-  action: { type: string; payload?: any }
+  action: { type?: string; payload?: any; internalChanges?: any }
 ) => {
   switch (action.type) {
     case useExpanded.types.toggleExpand:
@@ -28,9 +28,31 @@ const internalReducer = (
       throw new Error(`Action type ${action.type} not handled`);
   }
 };
-export default function useExpanded(initialExpanded = false) {
+export default function useExpanded(
+  initialExpanded = false,
+  userReducer = (
+    state: { expanded: boolean },
+    action: { internalChanges: any }
+  ) => action.internalChanges
+) {
   const initialState = { expanded: initialExpanded };
-  // const [expanded, setExpanded] = useState<boolean>(initialExpanded);
+  const resolveChangesReducer = (
+    currentInternalState: { expanded: boolean },
+    action: { type?: string; payload?: any; internalChanges?: any }
+  ) => {
+    const internalChanges = internalReducer(currentInternalState, action);
+    const userChanges = userReducer(currentInternalState, {
+      ...action,
+      internalChanges,
+    });
+    return userChanges;
+  };
+
+  const [{ expanded }, setExpanded] = useReducer(
+    resolveChangesReducer,
+    initialState
+  );
+
   const toggle = useCallback(
     () =>
       setExpanded({
@@ -39,7 +61,10 @@ export default function useExpanded(initialExpanded = false) {
     []
   );
 
-  const [{ expanded }, setExpanded] = useReducer(internalReducer, initialState);
+  const override = useCallback(
+    () => setExpanded({ type: useExpanded.types.override }),
+    []
+  );
 
   const resetRef = useRef(0);
 
@@ -68,8 +93,9 @@ export default function useExpanded(initialExpanded = false) {
       getTogglerProps,
       reset,
       resetDep: resetRef.current,
+      override,
     }),
-    [expanded, toggle, getTogglerProps, reset]
+    [expanded, toggle, getTogglerProps, reset, override]
   );
 }
 
