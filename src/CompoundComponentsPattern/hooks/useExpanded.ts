@@ -5,12 +5,17 @@ const callFunctionsInSequence =
     fns.forEach((fn) => fn && fn(...args));
 export default function useExpanded(initialExpanded = false) {
   const [expanded, setExpanded] = useState<boolean>(initialExpanded);
+  const [resetDep, setResetDep] = useState<number>(0);
   const toggle = useCallback(
     () => setExpanded((prevExpanded) => !prevExpanded),
     []
   );
 
-  // const value = useMemo(() => ({ expanded, toggle }), [expanded, toggle]);
+  const reset = useCallback(() => {
+    // look here 👇
+    setExpanded(initialExpanded);
+    setResetDep((resetDep) => resetDep + 1);
+  }, [initialExpanded]);
 
   const getTogglerProps = useCallback(
     (customProps?: { [p: string]: any }) => ({
@@ -22,7 +27,7 @@ export default function useExpanded(initialExpanded = false) {
   );
 
   return useMemo(
-    () => ({ expanded, toggle, getTogglerProps }),
-    [expanded, toggle, getTogglerProps]
+    () => ({ expanded, toggle, getTogglerProps, reset, resetDep }),
+    [expanded, toggle, getTogglerProps, reset, resetDep]
   );
 }

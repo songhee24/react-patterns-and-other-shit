@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import Expandable from "./CompoundComponentsPattern/expandableComponent/Expandable";
+import React from "react";
 import "./App.css";
 import useExpanded from "./CompoundComponentsPattern/hooks/useExpanded";
 import useEffectAfterMount from "./CompoundComponentsPattern/hooks/useEffectAfterMount";
+import Icon from "./CompoundComponentsPattern/expandableComponent/Icon";
+import Header from "./CompoundComponentsPattern/expandableComponent/Header";
+import Body from "./CompoundComponentsPattern/expandableComponent/Body";
+import { longText as TermsAndConditionText } from "./CompoundComponentsPattern/utils/constants";
 
 const information = [
   {
@@ -24,29 +27,22 @@ function App() {
   // const onExpand = (evt: React.MouseEvent<HTMLElement>) =>
   //   setActiveIndex(+evt.currentTarget.dataset.index!);
 
-  const customClickHandler = () => {
-    console.log("custom click handler!!!!!");
-  };
-
-  const { expanded, getTogglerProps } = useExpanded();
+  const { expanded, toggle, resetDep, reset } = useExpanded(true);
   useEffectAfterMount(() => {
-    // user can perform any side effect here 👇
-    console.log("Yay! button was clicked!!");
-  }, [expanded]);
+    console.log("reset cleanup in progress!!!!");
+  }, [resetDep]);
 
   return (
-    <div style={{ marginTop: "3rem" }}>
-      <button
-        {...getTogglerProps({
-          id: "my-btn-id",
-          "aria-label": "custom toggler",
-          onClick: customClickHandler,
-        })}
-      >
-        Click to view awesomeness...
-      </button>
-      {expanded ? <p>{"😎".repeat(50)}</p> : null}
-    </div>
+    <section className="App">
+      <div className="Expandable">
+        <Header toggle={toggle}> Terms and Conditions </Header>
+        <Icon expanded={expanded} />
+        <Body expanded={expanded}>
+          {TermsAndConditionText}
+          <button onClick={reset}>reset</button>
+        </Body>
+      </div>
+    </section>
   );
 }
 
