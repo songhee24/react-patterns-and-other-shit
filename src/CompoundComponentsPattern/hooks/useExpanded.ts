@@ -9,7 +9,7 @@ export default function useExpanded() {
 
   // const value = useMemo(() => ({ expanded, toggle }), [expanded, toggle]);
 
-  const togglerProps = useMemo(
+  const getTogglerProps = useCallback(
     () => ({
       onClick: toggle,
       "aria-expanded": expanded,
@@ -18,7 +18,7 @@ export default function useExpanded() {
   );
 
   return useMemo(
-    () => ({ expanded, toggle, togglerProps }),
-    [expanded, toggle, togglerProps]
+    () => ({ expanded, toggle, getTogglerProps }),
+    [expanded, toggle, getTogglerProps]
   );
 }
