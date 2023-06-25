@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./App.css";
 import useExpanded from "./CompoundComponentsPattern/hooks/useExpanded";
 import useEffectAfterMount from "./CompoundComponentsPattern/hooks/useEffectAfterMount";
 import Icon from "./CompoundComponentsPattern/expandableComponent/Icon";
 import Header from "./CompoundComponentsPattern/expandableComponent/Header";
 import Body from "./CompoundComponentsPattern/expandableComponent/Body";
-import { longText as TermsAndConditionText } from "./CompoundComponentsPattern/utils/constants";
 
 const information = [
   {
@@ -23,16 +22,34 @@ const information = [
 ];
 
 function App() {
-  // const [activeIndex, setActiveIndex] = useState<number>(-1);
-  // const onExpand = (evt: React.MouseEvent<HTMLElement>) =>
-  //   setActiveIndex(+evt.currentTarget.dataset.index!);
-
-  const { expanded, toggle, resetDep, reset } = useExpanded(true);
+  const hasViewedSecret = useRef(false); // 👈 initial value i
+  const {
+    expanded,
+    toggle,
+    reset,
+    resetDep = 0,
+  } = useExpanded(
+    false,
+    appReducer // 👈 hacker passes in their reducer
+  );
   useEffectAfterMount(() => {
     window.open("https://leanpub.com/reintroducing-react", "_blank");
+    hasViewedSecret.current = true;
   }, [resetDep]);
 
-  console.log(resetDep);
+  function appReducer(
+    currentInternalState: any,
+    action: { internalChanges: any }
+  ) {
+    if (hasViewedSecret.current) {
+      return {
+        ...action.internalChanges,
+        expanded: false,
+      };
+    }
+
+    return action.internalChanges;
+  }
 
   return (
     <section className="App">
@@ -40,8 +57,10 @@ function App() {
         <Header toggle={toggle}> Terms and Conditions </Header>
         <Icon expanded={expanded} />
         <Body expanded={expanded}>
-          {TermsAndConditionText}
-          <button onClick={reset}>reset</button>
+          <p>
+            Click to view the conspiracy <br />
+            <button onClick={reset}> View secret </button>
+          </p>
         </Body>
       </div>
     </section>
