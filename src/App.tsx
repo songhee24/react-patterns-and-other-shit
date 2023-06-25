@@ -24,6 +24,10 @@ function App() {
   // const onExpand = (evt: React.MouseEvent<HTMLElement>) =>
   //   setActiveIndex(+evt.currentTarget.dataset.index!);
 
+  const customClickHandler = () => {
+    console.log("custom click handler!!!!!");
+  };
+
   const { expanded, getTogglerProps } = useExpanded();
   useEffectAfterMount(() => {
     // user can perform any side effect here 👇
@@ -36,6 +40,7 @@ function App() {
         {...getTogglerProps({
           id: "my-btn-id",
           "aria-label": "custom toggler",
+          onClick: customClickHandler,
         })}
       >
         Click to view awesomeness...

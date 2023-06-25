@@ -1,5 +1,8 @@
 import { useCallback, useMemo, useState } from "react";
-
+const callFunctionsInSequence =
+  (...fns: any[]) =>
+  (...args: any) =>
+    fns.forEach((fn) => fn && fn(...args));
 export default function useExpanded() {
   const [expanded, setExpanded] = useState<boolean>(false);
   const toggle = useCallback(
@@ -11,9 +14,9 @@ export default function useExpanded() {
 
   const getTogglerProps = useCallback(
     (customProps?: { [p: string]: any }) => ({
-      onClick: toggle,
       "aria-expanded": expanded,
       ...customProps,
+      onClick: callFunctionsInSequence(toggle, customProps?.onClick),
     }),
     [toggle, expanded]
   );
