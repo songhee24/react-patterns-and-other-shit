@@ -24,7 +24,7 @@ function App() {
   // const onExpand = (evt: React.MouseEvent<HTMLElement>) =>
   //   setActiveIndex(+evt.currentTarget.dataset.index!);
 
-  const { expanded, toggle } = useExpanded();
+  const { expanded, togglerProps } = useExpanded();
   useEffectAfterMount(() => {
     // user can perform any side effect here 👇
     console.log("Yay! button was clicked!!");
@@ -32,7 +32,7 @@ function App() {
 
   return (
     <div style={{ marginTop: "3rem" }}>
-      <button onClick={toggle}>Click to view awesomeness...</button>
+      <button {...togglerProps}>Click to view awesomeness...</button>
       {expanded ? <p>{"😎".repeat(50)}</p> : null}
     </div>
   );
