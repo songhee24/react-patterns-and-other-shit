@@ -95,7 +95,7 @@ export default function useExpanded(
       resetDep: resetRef.current,
       override,
     }),
-    [expanded, toggle, getTogglerProps, reset, override]
+    [expanded, toggle, getTogglerProps, reset, override, resetRef.current]
   );
 }
 

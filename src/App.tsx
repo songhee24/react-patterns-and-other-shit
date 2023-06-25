@@ -32,6 +32,8 @@ function App() {
     window.open("https://leanpub.com/reintroducing-react", "_blank");
   }, [resetDep]);
 
+  console.log(resetDep);
+
   return (
     <section className="App">
       <div className="Expandable">
