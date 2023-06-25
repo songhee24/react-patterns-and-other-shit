@@ -32,7 +32,14 @@ function App() {
 
   return (
     <div style={{ marginTop: "3rem" }}>
-      <button {...getTogglerProps()}>Click to view awesomeness...</button>
+      <button
+        {...getTogglerProps({
+          id: "my-btn-id",
+          "aria-label": "custom toggler",
+        })}
+      >
+        Click to view awesomeness...
+      </button>
       {expanded ? <p>{"😎".repeat(50)}</p> : null}
     </div>
   );
