@@ -2,32 +2,33 @@ import React from "react";
 import Expandable from "./CompoundComponentsPattern/expandableComponent/Expandable";
 import "./App.css";
 
+const information = [
+  {
+    header: "Why everyone should live forever",
+    note: "This is highly sensitive information ... !!!!",
+  },
+  {
+    header: "The internet disappears",
+    note: "I just uncovered the biggest threat...",
+  },
+  {
+    header: "The truth about Elon musk and Mars!",
+    note: "Nobody tells you this...",
+  },
+];
+
 function App() {
   return (
     <div className="App">
-      <Expandable onExpand={() => {}}>
-        <Expandable.Header style={{ color: "red", border: "1px solid teal" }}>
-          React hooks
-        </Expandable.Header>
-        <Expandable.Icon />
-        <Expandable.Body>
-          <img
-            src="/api/collection/10370001/4597752283529216/page/5195905143668736/image/4691607934730240"
-            style={{ width: "250px" }}
-            alt="reintroducing react book cover"
-          />
-          <p style={{ opacity: 0.7 }}>
-            This book is so amazing! <br />
-            <a
-              href="https://leanpub.com/reintroducing-react"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Go get it now.
-            </a>
-          </p>
-        </Expandable.Body>
-      </Expandable>
+      {information.map(({ header, note }, index) => (
+        <Expandable key={index} onExpand={() => {}}>
+          <Expandable.Header style={{ color: "red", border: "1px solid teal" }}>
+            {header}
+          </Expandable.Header>
+          <Expandable.Icon />
+          <Expandable.Body>{note}</Expandable.Body>
+        </Expandable>
+      ))}
     </div>
   );
 }
