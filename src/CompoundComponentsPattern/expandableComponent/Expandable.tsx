@@ -47,7 +47,7 @@ const Expandable = ({
   const componentJustMounted = useRef<boolean>(true);
 
   useEffect(() => {
-    if (!componentJustMounted && !isExpandControlled) {
+    if (componentJustMounted != null && !isExpandControlled) {
       onExpand(expanded);
       componentJustMounted.current = false;
     }
