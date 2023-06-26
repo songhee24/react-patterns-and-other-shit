@@ -32,7 +32,7 @@ export default function useExpanded(
   initialExpanded = false,
   userReducer = (
     state: { expanded: boolean },
-    action: { internalChanges: any }
+    action: { internalChanges: any; type?: string }
   ) => action.internalChanges
 ) {
   const initialState = { expanded: initialExpanded };

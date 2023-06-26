@@ -28,10 +28,8 @@ function App() {
     toggle,
     reset,
     resetDep = 0,
-  } = useExpanded(
-    false,
-    appReducer // 👈 hacker passes in their reducer
-  );
+    override,
+  } = useExpanded(false, appReducer);
   useEffectAfterMount(() => {
     window.open("https://leanpub.com/reintroducing-react", "_blank");
     hasViewedSecret.current = true;
@@ -39,9 +37,12 @@ function App() {
 
   function appReducer(
     currentInternalState: any,
-    action: { internalChanges: any }
+    action: { internalChanges: any; type?: string }
   ) {
-    if (hasViewedSecret.current) {
+    if (
+      hasViewedSecret.current &&
+      action.type === useExpanded.types.toggleExpand
+    ) {
       return {
         ...action.internalChanges,
         expanded: false,
@@ -63,6 +64,9 @@ function App() {
           </p>
         </Body>
       </div>
+      {hasViewedSecret.current && (
+        <button onClick={override}>Be redeemed to view secret again</button>
+      )}
     </section>
   );
 }
