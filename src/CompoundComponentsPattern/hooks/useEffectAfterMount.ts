@@ -1,14 +1,14 @@
-import { useEffect, useRef } from "react";
+import { DependencyList, EffectCallback, useEffect, useRef } from "react";
 
 export default function useEffectAfterMount(
-  cb: (params?: any) => void,
-  deps: any[]
+  cb: EffectCallback,
+  deps: DependencyList | undefined
 ) {
   const componentJustMounted = useRef(true);
   useEffect(() => {
-    if (componentJustMounted.current) {
+    if (!componentJustMounted.current) {
       return cb();
     }
     componentJustMounted.current = false;
-  }, [...deps]);
+  }, deps);
 }
