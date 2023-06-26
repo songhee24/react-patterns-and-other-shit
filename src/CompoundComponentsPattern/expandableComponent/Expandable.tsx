@@ -13,12 +13,12 @@ import Icon from "./Icon";
 import "./Expandable.css";
 
 type ExpandableContextType = {
-  toggle: () => any;
+  toggle: (params: any) => any;
   expanded: boolean;
 };
 
 export const ExpandableContext = createContext<ExpandableContextType>({
-  toggle: () => {},
+  toggle: (params: any) => {},
   expanded: false,
 });
 const { Provider } = ExpandableContext;
@@ -27,30 +27,38 @@ interface Props {
   children: ReactNode;
   onExpand: (params: any) => void;
   className?: string;
+  shouldExpand?: boolean;
 }
 
 const Expandable = ({
   children,
   onExpand,
   className = "",
+  shouldExpand,
   ...otherProps
 }: Props) => {
+  const isExpandControlled = shouldExpand !== undefined;
   const [expanded, setExpanded] = useState(false);
   const toggle = useCallback(
     () => setExpanded((prevExpanded) => !prevExpanded),
     []
   );
+  const getToggle = isExpandControlled ? onExpand : toggle;
+  const componentJustMounted = useRef<boolean>(true);
 
-  const componentJustMounted = useRef(true);
   useEffect(() => {
-    if (!componentJustMounted.current) {
+    if (!componentJustMounted && !isExpandControlled) {
       onExpand(expanded);
+      componentJustMounted.current = false;
     }
-    componentJustMounted.current = false;
-  }, [expanded]);
+  }, [expanded, onExpand, isExpandControlled]);
 
-  const value = useMemo(() => ({ expanded, toggle }), [expanded, toggle]);
+  const getState = isExpandControlled ? shouldExpand : expanded;
   const combinedClassNames = ["Expandable", className].join("");
+  const value = useMemo(
+    () => ({ expanded: getState, toggle: getToggle }),
+    [getState, getToggle]
+  );
 
   return (
     <Provider value={value}>
