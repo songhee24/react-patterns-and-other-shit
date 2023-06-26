@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Expandable from "./CompoundComponentsPattern/expandableComponent/Expandable";
 import "./App.css";
+import useExpanded from "./CompoundComponentsPattern/hooks/useExpanded";
 
 const information = [
   {
@@ -18,28 +19,32 @@ const information = [
 ];
 
 function App() {
-  const [activeIndex, setActiveIndex] = useState<number>(-1);
-  const onExpand = (evt: React.MouseEvent<HTMLElement>) =>
-    setActiveIndex(+evt.currentTarget.dataset.index!);
-
+  // const [activeIndex, setActiveIndex] = useState<number>(-1);
+  // const onExpand = (evt: React.MouseEvent<HTMLElement>) =>
+  //   setActiveIndex(+evt.currentTarget.dataset.index!);
+  // <div className="App">
+  //   {information.map(({ header, note }, index) => (
+  //       <Expandable
+  //           shouldExpand={index === +activeIndex}
+  //           key={index}
+  //           onExpand={onExpand}
+  //       >
+  //         <Expandable.Header
+  //             data-index={index}
+  //             style={{ color: "red", border: "1px solid teal" }}
+  //         >
+  //           {header}
+  //         </Expandable.Header>
+  //         <Expandable.Icon />
+  //         <Expandable.Body>{note}</Expandable.Body>
+  //       </Expandable>
+  //   ))}
+  // </div>
+  const { expanded, toggle } = useExpanded();
   return (
-    <div className="App">
-      {information.map(({ header, note }, index) => (
-        <Expandable
-          shouldExpand={index === +activeIndex}
-          key={index}
-          onExpand={onExpand}
-        >
-          <Expandable.Header
-            data-index={index}
-            style={{ color: "red", border: "1px solid teal" }}
-          >
-            {header}
-          </Expandable.Header>
-          <Expandable.Icon />
-          <Expandable.Body>{note}</Expandable.Body>
-        </Expandable>
-      ))}
+    <div style={{ marginTop: "3rem" }}>
+      <button onClick={toggle}>Click to view awesomeness...</button>
+      {expanded ? <p>{"😎".repeat(50)}</p> : null}
     </div>
   );
 }
