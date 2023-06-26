@@ -19,9 +19,8 @@ const information = [
 
 function App() {
   const [activeIndex, setActiveIndex] = useState<number>(-1);
-  const onExpand = (evt: any) => {
-    console.log(evt);
-  };
+  const onExpand = (evt: React.MouseEvent<HTMLElement>) =>
+    setActiveIndex(+evt.currentTarget.dataset.index!);
 
   return (
     <div className="App">
@@ -32,7 +31,7 @@ function App() {
           onExpand={onExpand}
         >
           <Expandable.Header
-            data-index={""}
+            data-index={index}
             style={{ color: "red", border: "1px solid teal" }}
           >
             {header}
