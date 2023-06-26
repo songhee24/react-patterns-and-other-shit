@@ -1,13 +1,12 @@
-import { ReactNode, useContext } from "react";
-import { ExpandableContext } from "./Expandable";
+import { ReactNode } from "react";
 import "./Body.css";
 
 interface Props {
   children: ReactNode;
   className?: string;
+  expanded: boolean;
 }
-const Body = ({ children, className = "", ...otherProps }: Props) => {
-  const { expanded } = useContext(ExpandableContext);
+const Body = ({ children, className = "", expanded, ...otherProps }: Props) => {
   const combinedClassNames = ["Expandable-panel", className].join("");
   return (
     <div {...otherProps} className={combinedClassNames}>

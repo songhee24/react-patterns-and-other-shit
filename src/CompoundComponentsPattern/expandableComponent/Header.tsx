@@ -1,15 +1,13 @@
-import React, { ReactNode, useContext } from "react";
-import { ExpandableContext } from "./Expandable";
+import React, { ReactNode } from "react";
 import "./Header.css";
 
 interface Props extends React.ComponentPropsWithoutRef<"button"> {
   children: ReactNode;
   className?: string;
+  toggle: (params: any) => void;
 }
 
-const Header = ({ children, className = "", ...otherProps }: Props) => {
-  const { toggle } = useContext(ExpandableContext);
-
+const Header = ({ children, className = "", toggle, ...otherProps }: Props) => {
   const combinedClassName = ["Expandable-trigger", className]
     .filter(Boolean)
     .join("");
