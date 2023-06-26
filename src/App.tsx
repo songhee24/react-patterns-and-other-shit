@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Expandable from "./CompoundComponentsPattern/expandableComponent/Expandable";
 import "./App.css";
 
@@ -18,11 +18,23 @@ const information = [
 ];
 
 function App() {
+  const [activeIndex, setActiveIndex] = useState<number>(-1);
+  const onExpand = (evt: any) => {
+    console.log(evt);
+  };
+
   return (
     <div className="App">
       {information.map(({ header, note }, index) => (
-        <Expandable key={index} onExpand={() => {}}>
-          <Expandable.Header style={{ color: "red", border: "1px solid teal" }}>
+        <Expandable
+          shouldExpand={index === +activeIndex}
+          key={index}
+          onExpand={onExpand}
+        >
+          <Expandable.Header
+            data-index={""}
+            style={{ color: "red", border: "1px solid teal" }}
+          >
             {header}
           </Expandable.Header>
           <Expandable.Icon />
