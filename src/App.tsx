@@ -4,7 +4,9 @@ import Expandable from "./CompoundComponentsPattern/expandableComponent/Expandab
 function App() {
   return (
     <Expandable onExpand={() => {}}>
-      <Expandable.Header>React hooks</Expandable.Header>
+      <Expandable.Header style={{ color: "red" }}>
+        React hooks
+      </Expandable.Header>
       <Expandable.Icon />
       <Expandable.Body>Hooks are awesome</Expandable.Body>
     </Expandable>
