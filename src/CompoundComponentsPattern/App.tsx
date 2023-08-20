@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import "./App.css";
-import useExpanded from "./CompoundComponentsPattern/hooks/useExpanded";
-import useEffectAfterMount from "./CompoundComponentsPattern/hooks/useEffectAfterMount";
-import Icon from "./CompoundComponentsPattern/expandableComponent/Icon";
-import Header from "./CompoundComponentsPattern/expandableComponent/Header";
-import Body from "./CompoundComponentsPattern/expandableComponent/Body";
+import useExpanded from "./hooks/useExpanded";
+import useEffectAfterMount from "./hooks/useEffectAfterMount";
+import Icon from "./expandableComponent/Icon";
+import Header from "./expandableComponent/Header";
+import Body from "./expandableComponent/Body";
 
 const information = [
   {
