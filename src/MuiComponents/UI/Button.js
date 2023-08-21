@@ -8,6 +8,7 @@ export const Button = ({
   icon,
   fullWidth,
   loading,
+  ...otherProps
 }) => {
   return (
     <MuiButton
@@ -16,6 +17,7 @@ export const Button = ({
       startIcon={icon}
       disabled={disabled || loading}
       fullWidth={fullWidth}
+      {...otherProps}
     >
       {children}
     </MuiButton>
