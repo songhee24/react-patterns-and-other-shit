@@ -1,10 +1,9 @@
 import { Button as MuiButton } from "@mui/material";
 import styled from "@emotion/styled";
 
-const StyledMuiButton = styled(MuiButton)`
-  background-color: #8710e8;
-`;
-
+const StyledMuiButton = styled(MuiButton)({
+  backgroundColor: "#8710e8",
+});
 export const Button = ({
   size,
   disabled,
