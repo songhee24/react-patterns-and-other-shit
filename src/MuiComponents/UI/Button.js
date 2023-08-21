@@ -2,12 +2,15 @@ import { Button as MuiButton } from "@mui/material";
 import styled from "@emotion/styled";
 
 const StyledMuiButton = styled(MuiButton)({
-  backgroundColor: "#8710e8",
+  minWidth: "170px",
+  height: "44px",
+  backgroundColor: "#FCB408",
   boxShadow: "none",
   "&:hover": {
-    backgroundColor: "#aa52f1",
+    backgroundColor: "#f8d06f",
     boxShadow: "none",
   },
+  borderRadius: "48px",
 });
 export const Button = ({
   size,
