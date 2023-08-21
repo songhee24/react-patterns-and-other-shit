@@ -1,4 +1,9 @@
 import { Button as MuiButton } from "@mui/material";
+import styled from "@emotion/styled";
+
+const StyledMuiButton = styled(MuiButton)`
+  background-color: #8710e8;
+`;
 
 export const Button = ({
   size,
@@ -11,7 +16,7 @@ export const Button = ({
   ...otherProps
 }) => {
   return (
-    <MuiButton
+    <StyledMuiButton
       size={size}
       variant={variant}
       startIcon={icon}
@@ -20,6 +25,6 @@ export const Button = ({
       {...otherProps}
     >
       {children}
-    </MuiButton>
+    </StyledMuiButton>
   );
 };
