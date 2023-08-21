@@ -10,6 +10,12 @@ const StyledMuiButton = styled(MuiButton)({
     backgroundColor: "#f8d06f",
     boxShadow: "none",
   },
+  "&.MuiButton-text": {
+    backgroundColor: "transparent",
+  },
+  "&.MuiButton-text:active": {
+    backgroundColor: "#f8d06f",
+  },
   borderRadius: "48px",
 });
 export const Button = ({
