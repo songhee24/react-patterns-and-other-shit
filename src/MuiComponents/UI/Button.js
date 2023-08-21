@@ -1,9 +1,5 @@
 import { Button as MuiButton } from "@mui/material";
 
-export const Button = () => {
-  return (
-    <div>
-      <MuiButton fullWidth>My Button</MuiButton>
-    </div>
-  );
+export const Button = ({ children, fullWidth }) => {
+  return <MuiButton fullWidth={fullWidth}>{children}</MuiButton>;
 };
