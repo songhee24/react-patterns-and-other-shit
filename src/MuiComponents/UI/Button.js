@@ -3,7 +3,7 @@ import { Button as MuiButton } from "@mui/material";
 export const Button = ({
   size,
   disabled,
-  variant,
+  variant = "contained",
   children,
   icon,
   fullWidth,
