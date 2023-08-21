@@ -3,11 +3,15 @@ import { Button } from "./UI/Button";
 export default function App() {
   return (
     <div>
-      <Button size={"large"}>Hello world</Button>
+      <Button size={"large"} variant={"text"}>
+        Hello world
+      </Button>
       <hr />
       <Button>Hello world</Button>
       <hr />
-      <Button size={"small"}>Hello world</Button>
+      <Button size={"small"} variant={"outlined"}>
+        Hello world
+      </Button>
     </div>
   );
 }
