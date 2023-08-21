@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./MuiComponents/App";
 import reportWebVitals from "./reportWebVitals";
+import { ThemeProvider } from "@mui/material";
+import { globalTheme } from "./theme/globalTheme";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -10,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   // NOT_STABLE
   // <React.StrictMode>
-  <App />
+  <ThemeProvider theme={globalTheme}>
+    <App />
+  </ThemeProvider>
   // </React.StrictMode>
 );
 
