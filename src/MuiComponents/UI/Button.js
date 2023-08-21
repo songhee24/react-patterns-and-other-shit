@@ -3,6 +3,11 @@ import styled from "@emotion/styled";
 
 const StyledMuiButton = styled(MuiButton)({
   backgroundColor: "#8710e8",
+  boxShadow: "none",
+  "&:hover": {
+    backgroundColor: "#aa52f1",
+    boxShadow: "none",
+  },
 });
 export const Button = ({
   size,
